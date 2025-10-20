@@ -30,3 +30,28 @@ Message_Agent is your pocket-sized personal assistant — simple, smart, and scr
 - **Command-line interface (CLI)** with REPL mode and one-shot execution
 
 ---
+
+## 🧩 Example Usage
+
+### 🖥️ Run interactively
+
+```bash
+python message_agent.py
+Sample session:
+
+Enhanced Message Agent ready. Type '/help' for options.
+
+> hello
+Hello! How can I help you today?
+
+> calc 2+5*10
+Result: 52
+
+> remind me to submit report in 2 hours
+✓ Reminder set: 'submit report' at 01:23 PM on Oct 19
+
+> notes
+No notes saved.
+
+> note remember API key 12345
+✓ Note saved: 'remember API key 12345'
