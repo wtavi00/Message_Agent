@@ -52,3 +52,12 @@ class MessageAgent:
         self._install_default_handlers()
         self._load_memory()
 
+    # ------------------------ Public API ------------------------
+    def register_handler(self, predicate: Predicate, handler: Handler) -> None:
+        self._handlers.append((predicate, handler))
+
+    def add_preprocessor(self, preprocessor: Preprocessor) -> None:
+        self._preprocessors.append(preprocessor)
+
+    def add_postprocessor(self, postprocessor: Postprocessor) -> None:
+        self._postprocessors.append(postprocessor)
