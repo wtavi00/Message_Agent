@@ -25,3 +25,15 @@ Preprocessor = Callable[[str], str]
 Postprocessor = Callable[[AgentResponse], AgentResponse]
 Predicate = Callable[[str, Dict[str, Any]], bool]
 Handler = Callable[[str, Dict[str, Any]], AgentResponse]
+
+class MessageAgent:
+    """
+    A lightweight, extensible agent for handling user messages.
+
+    Features:
+    - Rule-based handler registry with predicates
+    - Simple persistent memory (JSON file)
+    - Pluggable pre/post-processors
+    - Built-in intents including reminders, notes, tasks, and web search
+    """
+    
