@@ -37,3 +37,18 @@ class MessageAgent:
     - Built-in intents including reminders, notes, tasks, and web search
     """
     
+    def __init__(
+        self,
+        memory_path: str = ".agent_memory.json",
+        preprocessors: Optional[List[Preprocessor]] = None,
+        postprocessors: Optional[List[Postprocessor]] = None,
+    ) -> None:
+        self.memory_path = memory_path
+        self._memory: Dict[str, Any] = {}
+        self._handlers: List[Tuple[Predicate, Handler]] = []
+        self._preprocessors: List[Preprocessor] = preprocessors or []
+        self._postprocessors: List[Postprocessor] = postprocessors or []
+
+        self._install_default_handlers()
+        self._load_memory()
+
