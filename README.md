@@ -55,3 +55,20 @@ No notes saved.
 
 > note remember API key 12345
 ✓ Note saved: 'remember API key 12345'
+
+> tasks
+No tasks found.
+
+> task finish project
+✓ Task added: 'finish project'
+
+> tasks
+Pending:
+1. ○ finish project
+
+> done 1
+✓ Task 1 marked as done!
+
+> bye
+Goodbye! 👋
+```
