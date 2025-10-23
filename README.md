@@ -85,3 +85,14 @@ python message_agent.py
 
 No external dependencies are required — it runs on the Python standard library only.
 
+## 🧠 Memory and Persistence
+All notes, reminders, and tasks are stored in a local JSON file:
+```bash
+.agent_memory.json
+You can clear it anytime via:
+```
+
+```bash
+/reset
+```
+
