@@ -72,3 +72,16 @@ Pending:
 > bye
 Goodbye! 👋
 ```
+
+## ⚙️ Installation
+Clone the repository and run with Python 3.8+:
+
+```bash
+
+git clone https://github.com/yourusername/Message_Agent.git
+cd MessageAgent
+python message_agent.py
+```
+
+No external dependencies are required — it runs on the Python standard library only.
+
