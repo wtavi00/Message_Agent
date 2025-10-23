@@ -96,4 +96,19 @@ class MessageAgent:
         else:
             response = self._fallback_handler(message, context)
 
+        for postprocessor in self._postprocessors:
+            try:
+                response = postprocessor(response)
+            except Exception as postprocessor_error:
+                return AgentResponse(
+                    text=f"Postprocessor error: {postprocessor_error}",
+                    intent="error",
+                    confidence=1.0,
+                    metadata={"stage": "postprocessor"},
+                )
+
+        self._save_memory()
+        return response
+
+
 
