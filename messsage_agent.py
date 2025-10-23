@@ -78,3 +78,22 @@ class MessageAgent:
                     metadata={"stage": "preprocessor"},
                 )
 
+        for predicate, handler in self._handlers:
+            try:
+                if predicate(message, context):
+                    response = handler(message, context)
+                    response.metadata.setdefault("received_at", datetime.utcnow().isoformat() + "Z")
+                    response.metadata.setdefault("original_message", original_message)
+                    break
+            except Exception as handler_error:
+                response = AgentResponse(
+                    text=f"Handler error: {handler_error}",
+                    intent="error",
+                    confidence=1.0,
+                    metadata={"stage": "handler"},
+                )
+                break
+        else:
+            response = self._fallback_handler(message, context)
+
+
