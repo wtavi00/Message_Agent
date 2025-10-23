@@ -61,3 +61,20 @@ class MessageAgent:
 
     def add_postprocessor(self, postprocessor: Postprocessor) -> None:
         self._postprocessors.append(postprocessor)
+
+    def process(self, message: str, context: Optional[Dict[str, Any]] = None) -> AgentResponse:
+        if context is None:
+            context = {}
+
+        original_message = message
+        for preprocessor in self._preprocessors:
+            try:
+                message = preprocessor(message)
+            except Exception as preprocessor_error:
+                return AgentResponse(
+                    text=f"Preprocessor error: {preprocessor_error}",
+                    intent="error",
+                    confidence=1.0,
+                    metadata={"stage": "preprocessor"},
+                )
+
