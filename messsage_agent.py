@@ -117,4 +117,9 @@ class MessageAgent:
     def __str__(self) -> str:
         return f"<MessageAgent handlers={len(self._handlers)} memory_keys={list(self._memory.keys())}>"
 
+    # ------------------------ Defaults ------------------------
+    def _install_default_handlers(self) -> None:
+        # keep existing preprocessors
+        self.add_preprocessor(lambda m: m.strip())
+        self.add_preprocessor(lambda m: re.sub(r"\s+", " ", m))
 
