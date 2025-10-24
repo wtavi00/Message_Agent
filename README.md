@@ -96,3 +96,12 @@ You can clear it anytime via:
 /reset
 ```
 
+## 🧰 CLI Commands
+```
+Command	Description
+/help	Show command help
+/echo TEXT	Echo back any text
+/reset	Clear saved memory
+/whoami NAME	Set your name for greetings
+/quit	Exit the agent
+```
