@@ -110,5 +110,11 @@ class MessageAgent:
         self._save_memory()
         return response
 
+    def reset_memory(self) -> None:
+        self._memory = {}
+        self._save_memory()
+
+    def __str__(self) -> str:
+        return f"<MessageAgent handlers={len(self._handlers)} memory_keys={list(self._memory.keys())}>"
 
 
