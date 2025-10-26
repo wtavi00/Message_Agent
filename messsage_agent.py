@@ -166,3 +166,7 @@ class MessageAgent:
 
         self.register_handler(is_help, handle_help)
 
+        # ---------------- FAREWELL ----------------
+        def is_farewell(message: str, _: Dict[str, Any]) -> bool:
+            return bool(re.search(r"\b(bye|goodbye|see ya|ttyl)\b", message, re.IGNORECASE))
+
