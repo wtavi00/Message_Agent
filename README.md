@@ -105,3 +105,17 @@ Command	Description
 /whoami NAME	Set your name for greetings
 /quit	Exit the agent
 ```
+
+## 🪄 Supported Natural Commands
+```
+Intent	Example	Description
+Greeting	hello, hi there	Friendly greeting
+Calculation	calc 5 * (3 + 2)	Math evaluation
+Age	age 2000-05-17	Calculates age
+Leap Year	leap 2024	Checks leap year
+Reminder	remind me to call mom in 2 hours	Sets reminders
+Notes	note buy milk / notes	Add or list notes
+Tasks	task clean room / done 1 / tasks	Manage tasks
+Search	search python tutorials	Web search (DuckDuckGo)
+```
+
