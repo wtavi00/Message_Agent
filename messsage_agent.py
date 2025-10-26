@@ -123,3 +123,24 @@ class MessageAgent:
         self.add_preprocessor(lambda m: m.strip())
         self.add_preprocessor(lambda m: re.sub(r"\s+", " ", m))
 
+        # ---------------- GREETING ----------------
+        def is_greeting(message: str, _: Dict[str, Any]) -> bool:
+            return bool(re.search(r"\b(hi|hello|hey)\b", message, re.IGNORECASE))
+
+        def handle_greeting(message: str, context: Dict[str, Any]) -> AgentResponse:
+            user_name = context.get("user_name") or self._memory.get("user_name")
+            if not user_name:
+                # best-effort extraction
+                name_match = re.search(r"i\s*'?m\s+(?P<name>[A-Za-z][A-Za-z\-']{1,29})", message, re.IGNORECASE)
+                if name_match:
+                    user_name = name_match.group("name")
+                    self._memory["user_name"] = user_name
+            greeting_name = f", {user_name}" if user_name else ""
+            return AgentResponse(
+                text=f"Hello{greeting_name}! How can I help you today?",
+                intent="greet",
+                confidence=0.95,
+            )
+
+        self.register_handler(is_greeting, handle_greeting)
+
