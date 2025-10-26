@@ -144,3 +144,25 @@ class MessageAgent:
 
         self.register_handler(is_greeting, handle_greeting)
 
+        # ---------------- HELP ----------------
+        def is_help(message: str, _: Dict[str, Any]) -> bool:
+            return any(keyword in message.lower() for keyword in ["help", "what can you do", "commands", "?help"])
+
+        def handle_help(_: str, __: Dict[str, Any]) -> AgentResponse:
+            help_text = (
+                "I can:\n"
+                "- Respond to greetings, goodbyes, and echo text.\n"
+                "- Calculate math: 'calc 2+2*5'.\n"
+                "- Tell age: 'age 2000-05-17'.\n"
+                "- Check leap year: 'leap 2024'.\n\n"
+                "NEW FEATURES:\n"
+                "- Reminders: 'remind me to call mom in 2 hours' or 'remind buy milk tomorrow'.\n"
+                "- Notes: 'note remember password is 1234' or 'notes' to list all.\n"
+                "- Tasks: 'task buy groceries' or 'tasks' to list, 'done 1' to complete.\n"
+                "- Search: 'search python tutorials' or 'search weather today'.\n\n"
+                "Use '/reset' to clear memory."
+            )
+            return AgentResponse(text=help_text, intent="help", confidence=0.9)
+
+        self.register_handler(is_help, handle_help)
+
