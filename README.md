@@ -119,3 +119,19 @@ Tasks	task clean room / done 1 / tasks	Manage tasks
 Search	search python tutorials	Web search (DuckDuckGo)
 ```
 
+## 🧩 Extending the Agent
+MessageAgent uses a predicate-handler architecture.
+
+You can easily register new behaviors:
+
+```bash
+def is_weather(message: str, _: dict) -> bool:
+    return message.lower().startswith("weather ")
+
+def handle_weather(message: str, _: dict) -> AgentResponse:
+    city = message.split(" ", 1)[1]
+    return AgentResponse(text=f"Fetching weather for {city}...", intent="weather", confidence=0.9)
+
+agent.register_handler(is_weather, handle_weather)
+```
+
