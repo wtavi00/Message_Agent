@@ -170,3 +170,7 @@ class MessageAgent:
         def is_farewell(message: str, _: Dict[str, Any]) -> bool:
             return bool(re.search(r"\b(bye|goodbye|see ya|ttyl)\b", message, re.IGNORECASE))
 
+        def handle_farewell(_: str, __: Dict[str, Any]) -> AgentResponse:
+            return AgentResponse(text="Goodbye! 👋", intent="farewell", confidence=0.9)
+
+        self.register_handler(is_farewell, handle_farewell)
