@@ -174,3 +174,7 @@ class MessageAgent:
             return AgentResponse(text="Goodbye! 👋", intent="farewell", confidence=0.9)
 
         self.register_handler(is_farewell, handle_farewell)
+
+        # ---------------- ECHO ----------------
+        def is_echo(message: str, _: Dict[str, Any]) -> bool:
+            return message.lower().startswith("/echo ") or message.lower() == "/echo"
