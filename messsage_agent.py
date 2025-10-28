@@ -190,3 +190,15 @@ class MessageAgent:
         def is_calc(message: str, _: Dict[str, Any]) -> bool:
             return message.lower().startswith("calc ")
 
+        def handle_calc(message: str, _: Dict[str, Any]) -> AgentResponse:
+            expr = message[5:].strip()
+            try:
+                # Safe eval: only math functions and numbers
+                allowed_names = {k: v for k, v in math.__dict__.items() if not k.startswith("__")}
+                result = eval(expr, {"__builtins__": {}}, allowed_names)
+                return AgentResponse(text=f"Result: {result}", intent="calc", confidence=0.95)
+            except Exception as e:
+                return AgentResponse(text=f"Error in calculation: {e}", intent="error", confidence=1.0)
+
+        self.register_handler(is_calc, handle_calc)
+
