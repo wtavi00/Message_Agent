@@ -135,3 +135,12 @@ def handle_weather(message: str, _: dict) -> AgentResponse:
 agent.register_handler(is_weather, handle_weather)
 ```
 
+## 🧱 Project Structure
+```bash
+MessageAgent/
+│
+├── message_agent.py
+├── .agent_memory.json       # Persistent storage (auto-created)
+└── README.md
+```
+
