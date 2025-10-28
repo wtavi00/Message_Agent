@@ -185,3 +185,8 @@ class MessageAgent:
             return AgentResponse(text=text_to_echo, intent="echo", confidence=0.99)
 
         self.register_handler(is_echo, handle_echo)
+
+        # ---------------- CALCULATION ----------------
+        def is_calc(message: str, _: Dict[str, Any]) -> bool:
+            return message.lower().startswith("calc ")
+
