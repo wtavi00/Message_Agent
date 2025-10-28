@@ -178,3 +178,10 @@ class MessageAgent:
         # ---------------- ECHO ----------------
         def is_echo(message: str, _: Dict[str, Any]) -> bool:
             return message.lower().startswith("/echo ") or message.lower() == "/echo"
+            
+        def handle_echo(message: str, _: Dict[str, Any]) -> AgentResponse:
+            parts = message.split(" ", 1)
+            text_to_echo = parts[1] if len(parts) > 1 else ""
+            return AgentResponse(text=text_to_echo, intent="echo", confidence=0.99)
+
+        self.register_handler(is_echo, handle_echo)
