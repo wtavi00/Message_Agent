@@ -144,3 +144,11 @@ MessageAgent/
 └── README.md
 ```
 
+## 🧩 Design Highlights
+- No dependencies: 100% Python stdlib
+
+- Safe math evaluation: restricted eval() environment
+
+- Graceful error handling: per-stage error recovery (pre/post/handler)
+
+- Customizable: add your own preprocessors and postprocessors
