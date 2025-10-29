@@ -220,3 +220,5 @@ class MessageAgent:
                     confidence=1.0,
                 )
 
+        self.register_handler(is_age, handle_age)
+
