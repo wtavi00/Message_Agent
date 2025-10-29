@@ -202,3 +202,21 @@ class MessageAgent:
 
         self.register_handler(is_calc, handle_calc)
 
+        # ---------------- AGE ----------------
+        def is_age(message: str, _: Dict[str, Any]) -> bool:
+            return message.lower().startswith("age ")
+
+        def handle_age(message: str, _: Dict[str, Any]) -> AgentResponse:
+            try:
+                dob_str = message.split(" ", 1)[1].strip()
+                dob = datetime.strptime(dob_str, "%Y-%m-%d").date()
+                today = date.today()
+                age = today.year - dob.year - ((today.month, today.day) < (dob.month, dob.day))
+                return AgentResponse(text=f"You are {age} years old.", intent="age", confidence=0.95)
+            except Exception:
+                return AgentResponse(
+                    text="Usage: age YYYY-MM-DD (example: age 2000-05-17)",
+                    intent="error",
+                    confidence=1.0,
+                )
+
