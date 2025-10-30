@@ -152,3 +152,8 @@ MessageAgent/
 - Graceful error handling: per-stage error recovery (pre/post/handler)
 
 - Customizable: add your own preprocessors and postprocessors
+
+
+## 🛑 Signal Handling
+Gracefully exits on Ctrl+C (SIGINT or SIGTERM), automatically saving memory.
+
