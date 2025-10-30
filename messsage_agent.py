@@ -222,3 +222,20 @@ class MessageAgent:
 
         self.register_handler(is_age, handle_age)
 
+        # ---------------- LEAP YEAR ----------------
+        def is_leap(message: str, _: Dict[str, Any]) -> bool:
+            return message.lower().startswith("leap ")
+
+        def handle_leap(message: str, _: Dict[str, Any]) -> AgentResponse:
+            try:
+                year = int(message.split(" ", 1)[1].strip())
+                is_leap = (year % 4 == 0 and year % 100 != 0) or (year % 400 == 0)
+                return AgentResponse(
+                    text=f"{year} is {'a leap year' if is_leap else 'not a leap year'}.",
+                    intent="leap_year",
+                    confidence=0.95,
+                )
+            except Exception:
+                return AgentResponse(text="Usage: leap YEAR (example: leap 2024)", intent="error", confidence=1.0)
+
+        self.register_handler(is_leap, handle_leap)
