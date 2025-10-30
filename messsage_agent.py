@@ -245,3 +245,26 @@ class MessageAgent:
             msg_lower = message.lower()
             return msg_lower.startswith("remind") or msg_lower == "reminders"
 
+
+        def handle_reminder(message: str, _: Dict[str, Any]) -> AgentResponse:
+            msg_lower = message.lower()
+            
+            # List reminders
+            if msg_lower == "reminders":
+                reminders = self._memory.get("reminders", [])
+                if not reminders:
+                    return AgentResponse(text="No reminders set.", intent="reminder_list", confidence=0.95)
+                
+                now = datetime.now()
+                active = []
+                for idx, r in enumerate(reminders, 1):
+                    due = datetime.fromisoformat(r["due_time"])
+                    status = "⏰ DUE" if due <= now else f"⏳ {self._format_time_left(due - now)}"
+                    active.append(f"{idx}. {r['text']} - {status}")
+                
+                return AgentResponse(
+                    text="Your reminders:\n" + "\n".join(active),
+                    intent="reminder_list",
+                    confidence=0.95
+                )
+
