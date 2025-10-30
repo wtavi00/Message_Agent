@@ -239,3 +239,9 @@ class MessageAgent:
                 return AgentResponse(text="Usage: leap YEAR (example: leap 2024)", intent="error", confidence=1.0)
 
         self.register_handler(is_leap, handle_leap)
+
+        # ---------------- REMINDERS ----------------
+        def is_reminder(message: str, _: Dict[str, Any]) -> bool:
+            msg_lower = message.lower()
+            return msg_lower.startswith("remind") or msg_lower == "reminders"
+
