@@ -326,3 +326,12 @@ class MessageAgent:
                     confidence=0.95
                 )
                 
+            except Exception as e:
+                return AgentResponse(
+                    text=f"Error setting reminder: {e}",
+                    intent="error",
+                    confidence=1.0
+                )
+
+        self.register_handler(is_reminder, handle_reminder)
+        
