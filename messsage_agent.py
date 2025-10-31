@@ -307,3 +307,7 @@ class MessageAgent:
                 reminder_text = re.sub(r'in \d+ (minute|minutes|hour|hours|day|days)', '', reminder_text, flags=re.IGNORECASE)
                 reminder_text = re.sub(r'(tomorrow|today)', '', reminder_text, flags=re.IGNORECASE)
                 reminder_text = reminder_text.strip()
+                
+                if not reminder_text:
+                    reminder_text = "Reminder"
+                    
