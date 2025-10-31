@@ -319,3 +319,10 @@ class MessageAgent:
                     "created": datetime.now().isoformat()
                 })
                 
+                time_str = due_time.strftime("%I:%M %p on %b %d")
+                return AgentResponse(
+                    text=f"✓ Reminder set: '{reminder_text}' at {time_str}",
+                    intent="reminder_set",
+                    confidence=0.95
+                )
+                
