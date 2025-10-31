@@ -311,3 +311,11 @@ class MessageAgent:
                 if not reminder_text:
                     reminder_text = "Reminder"
                     
+                # Store reminder
+                reminders = self._memory.setdefault("reminders", [])
+                reminders.append({
+                    "text": reminder_text,
+                    "due_time": due_time.isoformat(),
+                    "created": datetime.now().isoformat()
+                })
+                
