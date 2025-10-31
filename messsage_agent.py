@@ -302,3 +302,8 @@ class MessageAgent:
                         confidence=1.0
                     )
 
+                # Extract reminder text
+                reminder_text = re.sub(r'remind(me)?\s+(to\s+)?', '', message, flags=re.IGNORECASE)
+                reminder_text = re.sub(r'in \d+ (minute|minutes|hour|hours|day|days)', '', reminder_text, flags=re.IGNORECASE)
+                reminder_text = re.sub(r'(tomorrow|today)', '', reminder_text, flags=re.IGNORECASE)
+                reminder_text = reminder_text.strip()
