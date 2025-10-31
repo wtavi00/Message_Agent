@@ -268,3 +268,37 @@ class MessageAgent:
                     confidence=0.95
                 )
 
+            # Set reminder
+            try:
+                # Parse time delta
+                time_match = re.search(r'in (\d+) (minute|minutes|hour|hours|day|days)', msg_lower)
+                when_match = re.search(r'(tomorrow|today)', msg_lower)
+                
+                due_time = None
+                
+                if time_match:
+                    amount = int(time_match.group(1))
+                    unit = time_match.group(2)
+                    
+                    if 'minute' in unit:
+                        due_time = datetime.now() + timedelta(minutes=amount)
+                    elif 'hour' in unit:
+                        due_time = datetime.now() + timedelta(hours=amount)
+                    elif 'day' in unit:
+                        due_time = datetime.now() + timedelta(days=amount)
+                        
+                elif when_match:
+                    when = when_match.group(1)
+                    if when == "tomorrow":
+                        due_time = datetime.now() + timedelta(days=1)
+                        due_time = due_time.replace(hour=9, minute=0, second=0, microsecond=0)
+                    elif when == "today":
+                        due_time = datetime.now() + timedelta(hours=1)
+                
+                if not due_time:
+                    return AgentResponse(
+                        text="Usage: 'remind me to [task] in [X] hours/days' or 'remind [task] tomorrow'",
+                        intent="error",
+                        confidence=1.0
+                    )
+
