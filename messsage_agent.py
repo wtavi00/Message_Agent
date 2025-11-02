@@ -354,3 +354,8 @@ class MessageAgent:
                     timestamp = datetime.fromisoformat(note["created"]).strftime("%b %d, %I:%M %p")
                     note_list.append(f"{idx}. {note['text']} ({timestamp})")
                 
+                return AgentResponse(
+                    text="Your notes:\n" + "\n".join(note_list),
+                    intent="note_list",
+                    confidence=0.95
+                )
