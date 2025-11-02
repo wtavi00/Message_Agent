@@ -349,3 +349,8 @@ class MessageAgent:
                 if not notes:
                     return AgentResponse(text="No notes saved.", intent="note_list", confidence=0.95)
                 
+                note_list = []
+                for idx, note in enumerate(notes, 1):
+                    timestamp = datetime.fromisoformat(note["created"]).strftime("%b %d, %I:%M %p")
+                    note_list.append(f"{idx}. {note['text']} ({timestamp})")
+                
