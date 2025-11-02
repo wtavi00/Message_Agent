@@ -340,3 +340,12 @@ class MessageAgent:
             msg_lower = message.lower()
             return msg_lower.startswith("note ") or msg_lower == "notes"
             
+        def handle_note(message: str, _: Dict[str, Any]) -> AgentResponse:
+            msg_lower = message.lower()
+            
+            # List notes
+            if msg_lower == "notes":
+                notes = self._memory.get("notes", [])
+                if not notes:
+                    return AgentResponse(text="No notes saved.", intent="note_list", confidence=0.95)
+                
