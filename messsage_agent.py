@@ -335,3 +335,8 @@ class MessageAgent:
 
         self.register_handler(is_reminder, handle_reminder)
         
+        # ---------------- NOTES ----------------
+        def is_note(message: str, _: Dict[str, Any]) -> bool:
+            msg_lower = message.lower()
+            return msg_lower.startswith("note ") or msg_lower == "notes"
+            
