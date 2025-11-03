@@ -359,3 +359,12 @@ class MessageAgent:
                     intent="note_list",
                     confidence=0.95
                 )
+                
+            # Add note
+            note_text = message[5:].strip()
+            if not note_text:
+                return AgentResponse(
+                    text="Usage: 'note [your note text]' or 'notes' to list all",
+                    intent="error",
+                    confidence=1.0
+                )
