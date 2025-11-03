@@ -382,3 +382,12 @@ class MessageAgent:
 
         self.register_handler(is_note, handle_note)
 
+        # ---------------- TASKS ----------------
+        def is_task(message: str, _: Dict[str, Any]) -> bool:
+            msg_lower = message.lower()
+            return (msg_lower.startswith("task ") or msg_lower == "tasks" or 
+                    msg_lower.startswith("done ") or msg_lower.startswith("delete task "))
+
+        def handle_task(message: str, _: Dict[str, Any]) -> AgentResponse:
+            msg_lower = message.lower()
+            
