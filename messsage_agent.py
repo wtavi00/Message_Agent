@@ -368,3 +368,17 @@ class MessageAgent:
                     intent="error",
                     confidence=1.0
                 )
+            notes = self._memory.setdefault("notes", [])
+            notes.append({
+                "text": note_text,
+                "created": datetime.now().isoformat()
+            })
+            
+            return AgentResponse(
+                text=f"✓ Note saved: '{note_text}'",
+                intent="note_add",
+                confidence=0.95
+            )
+
+        self.register_handler(is_note, handle_note)
+
