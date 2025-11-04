@@ -408,4 +408,15 @@ class MessageAgent:
                     else:
                         pending.append(task_str)
 
-
+                result = []
+                if pending:
+                    result.append("Pending:\n" + "\n".join(pending))
+                if completed:
+                    result.append("Completed:\n" + "\n".join(completed))
+                
+                return AgentResponse(
+                    text="\n\n".join(result) if result else "No tasks found.",
+                    intent="task_list",
+                    confidence=0.95
+                )
+            
