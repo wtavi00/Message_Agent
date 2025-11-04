@@ -391,3 +391,13 @@ class MessageAgent:
         def handle_task(message: str, _: Dict[str, Any]) -> AgentResponse:
             msg_lower = message.lower()
             
+            # List tasks
+            if msg_lower == "tasks":
+                tasks = self._memory.get("tasks", [])
+                if not tasks:
+                    return AgentResponse(text="No tasks found.", intent="task_list", confidence=0.95)
+                
+                pending = []
+                completed = []
+
+
