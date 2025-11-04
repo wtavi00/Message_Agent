@@ -400,4 +400,12 @@ class MessageAgent:
                 pending = []
                 completed = []
 
+                for idx, task in enumerate(tasks, 1):
+                    status = "✓" if task.get("completed") else "○"
+                    task_str = f"{idx}. {status} {task['text']}"
+                    if task.get("completed"):
+                        completed.append(task_str)
+                    else:
+                        pending.append(task_str)
+
 
