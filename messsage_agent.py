@@ -440,5 +440,9 @@ class MessageAgent:
                             intent="error",
                             confidence=1.0
                         )
-
-
+                except (ValueError, IndexError):
+                    return AgentResponse(
+                        text="Usage: 'done [task number]' (example: done 1)",
+                        intent="error",
+                        confidence=1.0
+                    )
