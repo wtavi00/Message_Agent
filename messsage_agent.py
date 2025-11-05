@@ -420,3 +420,18 @@ class MessageAgent:
                     confidence=0.95
                 )
             
+            # Mark task as done
+            if msg_lower.startswith("done "):
+                try:
+                    task_num = int(message.split()[1])
+                    tasks = self._memory.get("tasks", [])
+                    
+                    if 1 <= task_num <= len(tasks):
+                        tasks[task_num - 1]["completed"] = True
+                        tasks[task_num - 1]["completed_at"] = datetime.now().isoformat()
+                        return AgentResponse(
+                            text=f"✓ Task {task_num} marked as done!",
+                            intent="task_complete",
+                            confidence=0.95
+                        )
+
