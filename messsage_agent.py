@@ -434,4 +434,11 @@ class MessageAgent:
                             intent="task_complete",
                             confidence=0.95
                         )
+                    else:
+                        return AgentResponse(
+                            text=f"Task {task_num} not found.",
+                            intent="error",
+                            confidence=1.0
+                        )
+
 
