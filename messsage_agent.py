@@ -446,3 +446,13 @@ class MessageAgent:
                         intent="error",
                         confidence=1.0
                     )
+
+            # Add task
+            task_text = message[5:].strip()
+            if not task_text:
+                return AgentResponse(
+                    text="Usage: 'task [description]' or 'tasks' to list all",
+                    intent="error",
+                    confidence=1.0
+                )
+            
