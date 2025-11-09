@@ -456,3 +456,18 @@ class MessageAgent:
                     confidence=1.0
                 )
             
+            tasks = self._memory.setdefault("tasks", [])
+            tasks.append({
+                "text": task_text,
+                "created": datetime.now().isoformat(),
+                "completed": False
+            })
+            
+            return AgentResponse(
+                text=f"✓ Task added: '{task_text}'",
+                intent="task_add",
+                confidence=0.95
+            )
+
+        self.register_handler(is_task, handle_task)
+        
