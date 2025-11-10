@@ -500,3 +500,15 @@ class MessageAgent:
                 
                 result_parts = []
 
+                if answer:
+                    result_parts.append(f"Answer: {answer}")
+                
+                if abstract:
+                    result_parts.append(f"Summary: {abstract}")
+                
+                if not answer and not abstract and related:
+                    result_parts.append("Related topics:")
+                    for item in related[:3]:
+                        if isinstance(item, dict) and "Text" in item:
+                            result_parts.append(f"- {item['Text']}")
+
