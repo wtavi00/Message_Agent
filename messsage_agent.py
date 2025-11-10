@@ -512,3 +512,15 @@ class MessageAgent:
                         if isinstance(item, dict) and "Text" in item:
                             result_parts.append(f"- {item['Text']}")
 
+                if result_parts:
+                    result_text = "\n\n".join(result_parts)
+                    result_text += f"\n\nFull results: https://duckduckgo.com/?q={encoded_query}"
+                else:
+                    result_text = f"No instant results found. View full results at:\nhttps://duckduckgo.com/?q={encoded_query}"
+                
+                return AgentResponse(
+                    text=result_text,
+                    intent="search",
+                    confidence=0.85
+                )
+
