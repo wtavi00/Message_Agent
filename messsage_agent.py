@@ -484,3 +484,19 @@ class MessageAgent:
                     confidence=1.0
                 )
 
+            try:
+                # Use DuckDuckGo Instant Answer API (simple, no API key needed)
+                encoded_query = urllib.parse.quote(query)
+                url = f"https://api.duckduckgo.com/?q={encoded_query}&format=json&no_html=1&skip_disambig=1"
+                
+                req = urllib.request.Request(url, headers={'User-Agent': 'MessageAgent/1.0'})
+                with urllib.request.urlopen(req, timeout=5) as response:
+                    data = json.loads(response.read().decode())
+                
+                # Extract useful information
+                abstract = data.get("Abstract", "")
+                answer = data.get("Answer", "")
+                related = data.get("RelatedTopics", [])
+                
+                result_parts = []
+
