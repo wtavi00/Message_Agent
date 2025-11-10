@@ -471,3 +471,16 @@ class MessageAgent:
 
         self.register_handler(is_task, handle_task)
         
+        # ---------------- WEB SEARCH ----------------
+        def is_search(message: str, _: Dict[str, Any]) -> bool:
+            return message.lower().startswith("search ")
+
+        def handle_search(message: str, _: Dict[str, Any]) -> AgentResponse:
+            query = message[7:].strip()
+            if not query:
+                return AgentResponse(
+                    text="Usage: 'search [your query]' (example: search python tutorials)",
+                    intent="error",
+                    confidence=1.0
+                )
+
