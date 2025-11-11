@@ -533,4 +533,16 @@ class MessageAgent:
 
         self.register_handler(is_search, handle_search)
         
+    def _fallback_handler(self, message: str, _: Dict[str, Any]) -> AgentResponse:
+        recent_messages: List[str] = self._memory.setdefault("recent_messages", [])
+        recent_messages.append(message)
+        if len(recent_messages) > 20:
+            recent_messages.pop(0)
+        return AgentResponse(
+            text="I am not sure how to handle that yet. Try 'help' to see options.",
+            intent="fallback",
+            confidence=0.2,
+            metadata={"recent_messages_count": len(recent_messages)},
+        )
+
 
