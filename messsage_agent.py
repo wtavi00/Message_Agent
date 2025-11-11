@@ -524,3 +524,13 @@ class MessageAgent:
                     confidence=0.85
                 )
 
+            except Exception as e:
+                return AgentResponse(
+                    text=f"Search unavailable. Try: https://duckduckgo.com/?q={encoded_query}\nError: {e}",
+                    intent="error",
+                    confidence=1.0
+                )
+
+        self.register_handler(is_search, handle_search)
+        
+
