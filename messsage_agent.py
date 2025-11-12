@@ -563,3 +563,17 @@ class MessageAgent:
         else:
             return f"{minutes}m left"
             
+    # ------------------------ Memory ------------------------
+    def _load_memory(self) -> None:
+        if not self.memory_path:
+            self._memory = {}
+            return
+        if not os.path.exists(self.memory_path):
+            self._memory = {}
+            return
+        try:
+            with open(self.memory_path, "r", encoding="utf-8") as file:
+                self._memory = json.load(file)
+        except Exception:
+            self._memory = {}
+
