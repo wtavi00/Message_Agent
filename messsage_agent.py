@@ -545,4 +545,21 @@ class MessageAgent:
             metadata={"recent_messages_count": len(recent_messages)},
         )
 
-
+    def _format_time_left(self, delta: timedelta) -> str:
+        """Format a timedelta into human-readable time left."""
+        total_seconds = int(delta.total_seconds())
+        
+        if total_seconds < 0:
+            return "overdue"
+        
+        days = total_seconds // 86400
+        hours = (total_seconds % 86400) // 3600
+        minutes = (total_seconds % 3600) // 60
+        
+        if days > 0:
+            return f"{days}d {hours}h left"
+        elif hours > 0:
+            return f"{hours}h {minutes}m left"
+        else:
+            return f"{minutes}m left"
+            
