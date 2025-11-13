@@ -597,3 +597,23 @@ def _install_signal_handlers(on_interrupt: Callable[[], None]) -> None:
     except Exception:
         pass
 
+def _print_cli_help() -> None:
+    print(
+        "\nCommands:\n"
+        "  /help           Show help\n"
+        "  /echo TEXT      Echo back TEXT\n"
+        "  /reset          Clear agent memory\n"
+        "  /whoami NAME    Set your name in memory\n"
+        "  /quit           Exit the chat\n\n"
+        "Practical Features:\n"
+        "  remind me to [task] in [X] hours/days\n"
+        "  reminders       List all reminders\n"
+        "  note [text]     Save a note\n"
+        "  notes           List all notes\n"
+        "  task [text]     Add a task\n"
+        "  tasks           List all tasks\n"
+        "  done [number]   Mark task as complete\n"
+        "  search [query]  Search the web\n"
+    )
+
+
