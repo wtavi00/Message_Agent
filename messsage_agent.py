@@ -577,3 +577,12 @@ class MessageAgent:
         except Exception:
             self._memory = {}
 
+    def _save_memory(self) -> None:
+        if not self.memory_path:
+            return
+        try:
+            with open(self.memory_path, "w", encoding="utf-8") as file:
+                json.dump(self._memory, file, indent=2, ensure_ascii=False)
+        except Exception:
+            pass
+
