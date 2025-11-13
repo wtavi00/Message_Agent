@@ -586,3 +586,14 @@ class MessageAgent:
         except Exception:
             pass
 
+def _install_signal_handlers(on_interrupt: Callable[[], None]) -> None:
+    def _handler(signum: int, _: Any) -> None:
+        on_interrupt()
+        sys.exit(0)
+
+    try:
+        signal.signal(signal.SIGINT, _handler)
+        signal.signal(signal.SIGTERM, _handler)
+    except Exception:
+        pass
+
