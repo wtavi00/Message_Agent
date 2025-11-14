@@ -616,4 +616,10 @@ def _print_cli_help() -> None:
         "  search [query]  Search the web\n"
     )
 
+def _run_repl() -> int:
+    agent = MessageAgent()
+
+    def _on_interrupt() -> None:
+        print("\nExiting... Bye!")
+
 
