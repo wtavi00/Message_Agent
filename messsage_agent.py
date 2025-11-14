@@ -622,4 +622,44 @@ def _run_repl() -> int:
     def _on_interrupt() -> None:
         print("\nExiting... Bye!")
 
+    _install_signal_handlers(_on_interrupt)
+    print("Enhanced Message Agent ready. Type '/help' for options.\n")
+
+    while True:
+        try:
+            user_input = input("> ").strip()
+        except EOFError:
+            print()
+            break
+
+        if not user_input:
+            continue
+
+        if user_input.lower() in {"/quit", ":q", "exit"}:
+            print("Bye!")
+            break
+
+        if user_input.lower() in {"/help", "help", "?", "-h", "--help"}:
+            _print_cli_help()
+            continue
+
+        if user_input.lower().startswith("/reset"):
+            agent.reset_memory()
+            print("Memory cleared.")
+            continue
+
+        if user_input.lower().startswith("/whoami"):
+            parts = user_input.split(" ", 1)
+            if len(parts) == 2 and parts[1].strip():
+                agent._memory["user_name"] = parts[1].strip()
+                agent._save_memory()
+                print(f"Okay, I'll call you {parts[1].strip()}.")
+            else:
+                print("Usage: /whoami NAME")
+            continue
+
+        response = agent.process(user_input)
+        print(response.text)
+
+    return 0
 
