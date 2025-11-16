@@ -663,3 +663,10 @@ def _run_repl() -> int:
 
     return 0
 
+def _run_one_shot(message: str) -> int:
+    agent = MessageAgent()
+    response = agent.process(message)
+    print(response.text)
+    return 0
+
+
