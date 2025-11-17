@@ -677,3 +677,6 @@ def main(argv: List[str]) -> int:
         return 0
     return _run_one_shot(" ".join(argv))
 
+
+if __name__ == "__main__":
+    raise SystemExit(main(sys.argv[1:]))
