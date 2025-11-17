@@ -157,3 +157,17 @@ MessageAgent/
 ## 🛑 Signal Handling
 Gracefully exits on Ctrl+C (SIGINT or SIGTERM), automatically saving memory.
 
+## 🛑 Signal Handling
+Gracefully exits on Ctrl+C (SIGINT or SIGTERM), automatically saving memory.
+
+🧠 Example: One-Shot Mode
+Run the agent with a single message:
+
+```bash
+python message_agent.py "calc 10/2"
+```
+Output:
+```bash
+Result: 5.0
+```
+
