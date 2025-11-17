@@ -669,4 +669,11 @@ def _run_one_shot(message: str) -> int:
     print(response.text)
     return 0
 
+def main(argv: List[str]) -> int:
+    if len(argv) == 0:
+        return _run_repl()
+    if argv[0] in {"-h", "--help"}:
+        _print_cli_help()
+        return 0
+    return _run_one_shot(" ".join(argv))
 
