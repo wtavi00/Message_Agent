@@ -171,3 +171,12 @@ Output:
 Result: 5.0
 ```
 
+## 📜 License
+License © 2025 — [LICENSE](https://github.com/wtavi00/Message_Agent/blob/main/LICENSE)
+
+
+##💡 Future Ideas
+  - Voice input/output support
+  - Integration with APIs (weather, calendar, email)
+  - GUI or web interface
+  - NLP-based intent detection (optional module)
